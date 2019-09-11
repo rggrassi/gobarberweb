@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import validate from '../validation/schema';
 
 export default function useForm(callback, schema) {
     const [values, setValues] = useState({});
@@ -15,18 +16,7 @@ export default function useForm(callback, schema) {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        schema.validate(values, { abortEarly: false })
-            .then(() => {
-                setErrors({});    
-            })
-            .catch(err => {
-                const errors = err.inner.reduce((result, error) => {
-                    result[error.path] = error.message
-                    return result;
-                }, {})
-                setErrors(errors);            
-            })
-        
+        setErrors(await validate(values, schema));           
         setSubmitting(true);
     };
 

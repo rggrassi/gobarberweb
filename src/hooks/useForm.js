@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import validate from '../validation/schema';
+import validate from '../validation/validate';
 
 export default function useForm(callback, schema) {
     const [values, setValues] = useState({});

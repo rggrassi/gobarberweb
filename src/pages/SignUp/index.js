@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import logo from '../../assets/logo.svg';
 import { Link } from 'react-router-dom';
+import schema from './validation/schema';
+import { Form, Input } from '@rocketseat/unform';
 
 export default function SignUp(props) {
 
@@ -8,20 +10,20 @@ export default function SignUp(props) {
         const { from } = props.location.state || { from: { pathname: '/dashboard' } };        
         return <Redirect to={from} />
     }*/
-    const handleSubmit = () => {
-
+    function handleSubmit(data) {
+        console.tron.log(data)
     }
 
     return ( 
         <Fragment>
             <img src={logo} alt="Gobarber"/>
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Nome completo" />
-                <input type="email" placeholder="Seu e-mail" />
-                <input type="password" placeholder="Sua senha secreta"/>
+            <Form schema={schema} onSubmit={handleSubmit} noValidate>
+                <Input name="name" type="text" placeholder="Nome completo" autoComplete="off" autoFocus />
+                <Input name="email" type="email" placeholder="Seu e-mail" autoComplete="off"/>
+                <Input name="password" type="password" placeholder="Sua senha secreta" autoComplete="off"/>
                 <button type="submit">Criar conta</button>
                 <Link to='/'>Já tenho login</Link>
-            </form>
+            </Form>
         </Fragment>
     )
 }

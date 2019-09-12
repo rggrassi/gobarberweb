@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import DefaultLayout from '../pages/layouts/default';
 import AuthtLayout from '../pages/layouts/auth';
-import store from '../store';
+import { store } from '../store';
 
 export default function RouteWrapper(props) {    
     const { component: Component, isPrivate, ...rest } = props;

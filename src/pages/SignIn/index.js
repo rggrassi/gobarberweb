@@ -1,24 +1,17 @@
 import React, { Fragment } from 'react';
+import { useDispatch } from 'react-redux';
+import { signInRequest } from '../../store/actions/auth';
 import logo from '../../assets/logo.svg';
 import { Link } from 'react-router-dom';
-//import useForm from '../../hooks/useForm';
 import schema from './validation/schema';
 import { Form, Input } from '@rocketseat/unform';
 
 export default function SignIn(props) {
-    /*const { 
-        values,
-        errors,
-        handleChange,
-        handleSubmit
-    } = useForm(login, schema);*/
     
-    /*if (signed) {
-        const { from } = props.location.state || { from: { pathname: '/dashboard' } };        
-        return <Redirect to={from} />
-    }*/
-    function handleSubmit(data) {
-        console.log(data);
+    const dispatch = useDispatch();
+
+    function handleSubmit({ email, password }) {
+        dispatch(signInRequest(email, password));
     }
     
     return ( 

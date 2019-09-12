@@ -1,4 +1,4 @@
-import { all, takeLatest, take } from 'redux-saga/effects';
+import { all, takeLatest } from 'redux-saga/effects';
 import { signIn } from './auth';
 import { SIGNIN_REQUEST } from '../actions/types';
 

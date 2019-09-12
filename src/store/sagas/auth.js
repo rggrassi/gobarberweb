@@ -1,6 +1,7 @@
 import { put, call } from 'redux-saga/effects';
 import api from '../../services/api';
 import { signInSuccess } from '../actions/auth';
+import history from '../../services/history';
 
 export function* signIn({ payload }) {
     const { email, password } = payload;
@@ -14,4 +15,6 @@ export function* signIn({ payload }) {
     }
 
     yield put(signInSuccess(token, user));
+
+    history.push('/dashboard')
 }

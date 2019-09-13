@@ -18,12 +18,6 @@ export default function SignIn(props) {
         <Fragment>
             <img src={logo} alt="Gobarber"/>
             <Form schema={schema} onSubmit={handleSubmit} noValidate>
-                {/*<input type="email" name="email" onChange={handleChange} value={values.email || ''} placeholder="Seu e-mail" autoComplete="off" autoFocus/>                                
-                errors.email && <span>{errors.email}</span> */}                
-
-                {/*<input type="password" name="password" onChange={handleChange} value={values.password || ''} placeholder="Sua senha secreta" autoComplete="off"/>
-                errors.password && <span>{errors.password}</span> */}
-                
                 <Input name="email" type="email" placeholder="Seu e-mail" autoComplete="off" autoFocus="on" autoCorrect="off"/>
                 <Input name="password" type="password" placeholder="Sua senha secreta" autoComplete="off" />
 

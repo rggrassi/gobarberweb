@@ -5,7 +5,6 @@ import ScrollBar from 'react-perfect-scrollbar';
 export const Container = styled.div`
     position: relative;
 `
-
 export const Badge = styled.button`
     background: none;
     border: 0;
@@ -27,7 +26,6 @@ export const Badge = styled.button`
         `
     }
 `
-
 export const NotificationList = styled.div`
     position: absolute;
     width: 260px;
@@ -36,6 +34,7 @@ export const NotificationList = styled.div`
     background: rgba(0, 0, 0, 0.6);
     border-radius: 4px;
     padding: 15px 5px;
+    display: ${props => props.visible ? 'block' : 'none'};
 
     &::before {
         content: '';
@@ -51,23 +50,19 @@ export const NotificationList = styled.div`
 `
 export const Notification = styled.div`
     color: #fff;
-
     & + div {
         margin-top: 15px;
         padding-top: 15px;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
-
     p {
         font-size: 13px;
         line-height: 18px;
     }
-
     time {
         font-size: 12px;
         opacity: 0.6;
     }
-
     button {
         font-size: 12px;
         border: 0;
@@ -75,9 +70,8 @@ export const Notification = styled.div`
         color: ${lighten(0.2, '#7159c1')};
         padding: 0 5px;
         margin: 0 5px;
-        border-left: 1 ps solid rgba(255, 255, 255, 0.1);
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
     }
-
     ${props => 
         props.unread &&
         css`
@@ -92,8 +86,6 @@ export const Notification = styled.div`
         `
     }
 `
-
-
 export const Scroll = styled(ScrollBar)`
     max-height: 300px;
     padding: 5px 15px;

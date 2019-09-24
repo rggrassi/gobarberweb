@@ -1,3 +1,7 @@
+export const AUTH_REQUEST = '@auth/AUTH_REQUEST';
+export const AUTH_SUCCESS = '@auth/AUTH_SUCCESS';
+export const AUTH_FAILURE = '@auth/AUTH_FAILURE';
+
 export const SIGNIN_REQUEST = '@auth/SIGNIN_REQUEST';
 export const SIGNIN_SUCCESS = '@auth/SIGNIN_SUCCESS';
 export const SIGNIN_FAILURE = '@auth/SIGNIN_FAILURE';

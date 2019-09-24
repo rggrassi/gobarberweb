@@ -4,8 +4,29 @@ import {
     SIGNIN_FAILURE, 
     SIGNUP_REQUEST, 
     SIGNUP_SUCCESS, 
-    SIGNUP_FAILURE 
+    SIGNUP_FAILURE,
+    AUTH_REQUEST,
+    AUTH_SUCCESS,
+    AUTH_FAILURE
 } from './types';
+
+export function authRequest() {
+    return {
+        type: AUTH_REQUEST
+    }
+}
+
+export function authSuccess() {
+    return {
+        type: AUTH_SUCCESS
+    }
+}
+
+export function authFailure() {
+    return {
+        type: AUTH_FAILURE,
+    }
+}
 
 export function signInRequest(email, password) {
     return {
@@ -14,10 +35,10 @@ export function signInRequest(email, password) {
     }
 }
 
-export function signInSuccess(token, user) {
+export function signInSuccess(auth, user) {
     return {
         type: SIGNIN_SUCCESS,
-        payload: { token, user }
+        payload: { auth, user }
     }
 }
 

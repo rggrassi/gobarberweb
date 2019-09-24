@@ -4,7 +4,8 @@ import {
     SIGNIN_FAILURE, 
     SIGNUP_REQUEST, 
     SIGNUP_SUCCESS, 
-    SIGNUP_FAILURE 
+    SIGNUP_FAILURE,
+    AUTH_FAILURE 
 } from '../actions/types';
 
 const INITIAL_STATE = { token: null, signed: false, loading: false };
@@ -15,7 +16,7 @@ export default function auth(state = INITIAL_STATE, action) {
             return { ...state, loading: true }
         }
         case SIGNIN_SUCCESS: {
-            return { ...state, token: action.payload.token, signed: true, loading: false }
+            return { ...state, token: action.payload.auth.token, signed: true, loading: false }
         }
         case SIGNIN_FAILURE: {
             return { ...state, loading: false }
@@ -28,6 +29,9 @@ export default function auth(state = INITIAL_STATE, action) {
         }
         case SIGNUP_FAILURE: {
             return { ...state, loading: false }
+        }
+        case AUTH_FAILURE: {
+            return { ...state, signed: false }
         }
         default: 
             return state;

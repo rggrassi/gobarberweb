@@ -12,7 +12,7 @@ import GlobalStyle from './styles/global';
 export default function App() {
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistor}>  
+      <PersistGate persistor={persistor}>
         <Router history={history}>
           <Routes />
           <GlobalStyle />

@@ -1,8 +1,29 @@
 import { put, call } from 'redux-saga/effects';
 import api from '../../services/api';
-import { signInSuccess, signInFailure, signUpSuccess, signUpFailure } from '../actions/auth';
+import { signInSuccess, signInFailure, signUpSuccess, signUpFailure, authFailure } from '../actions/auth';
 import history from '../../services/history';
 import { toast } from 'react-toastify';
+import jwtDecode from 'jwt-decode';
+
+export function* auth({ payload }) {
+
+    console.log("auth saga*")
+
+    if (!payload) {
+        return;
+    }
+
+    const { token } = payload.auth   
+
+    try {        
+        jwtDecode(token);   
+        //if (auth.token) {
+        api.defaults.headers.Authorization = `Bearer ${token}`;
+        //}
+    } catch (error) {        
+        yield put(authFailure());
+    }
+}
 
 export function* signIn({ payload }) {
     const { email, password } = payload;
@@ -10,13 +31,14 @@ export function* signIn({ payload }) {
     try {
         const response = yield call(api.post, 'session', { email, password });
         const { token, user } = response.data;
-    
+        const auth = { token };
+
         if (!user.provider) {
             toast.warn('Usuário não é prestador.')
             return;
-        }
-    
-        yield put(signInSuccess(token, user));
+        }       
+
+        yield put(signInSuccess(auth, user));
     
         history.push('/dashboard');        
     } catch (err) {

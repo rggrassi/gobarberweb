@@ -4,9 +4,9 @@ import { toast } from 'react-toastify';
 import { updateProfileSuccess, updateProfileFailure } from '../actions/user';
 
 export function* updateProfile({ payload }) {
-  const { name, email, ...rest } = payload.data;
+  const { name, email, avatar_id, ...rest } = payload.data;
   
-  const profile = Object.assign({ name, email }, rest.oldPassword ? rest: {});
+  const profile = Object.assign({ name, email, avatar_id }, rest.oldPassword ? rest: {});
   try {
     const response = yield call(api.put, '/users', profile);
 

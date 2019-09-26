@@ -18,9 +18,9 @@ export default function Profile() {
             <Form onSubmit={handleSubmit} initialData={profile}>
                 <AvatarInput name='avatar_id'/>
                 <Input name='name' placeholder='Nome completo'/>
-                <Input name='email' placeholder='Seu e-mail'/>
+                <Input name='email' placeholder='Seu e-mail' autoComplete='off'/>
                 <hr/>
-                <Input name='oldPassword' type='password' placeholder='Sua senha atual'/>
+                <Input name='oldPassword' type='password' placeholder='Sua senha atual' autoComplete='off'/>
                 <Input name='password' placeholder='Nova senha'/>
                 <Input name='confirmPassword' placeholder='Confirmação de senha'/>
                 <button onClick={handleSubmit} type='submit'>Atualizar perfil</button>

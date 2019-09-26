@@ -6,20 +6,13 @@ import { toast } from 'react-toastify';
 import jwtDecode from 'jwt-decode';
 
 export function* auth({ payload }) {
-
-    console.log("auth saga*")
-
     if (!payload) {
         return;
     }
-
-    const { token } = payload.auth   
-
+    const { token } = payload.auth;   
     try {        
         jwtDecode(token);   
-        //if (auth.token) {
         api.defaults.headers.Authorization = `Bearer ${token}`;
-        //}
     } catch (error) {        
         yield put(authFailure());
     }

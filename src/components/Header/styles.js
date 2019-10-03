@@ -24,6 +24,7 @@ export const Content = styled.div`
         }
 
         a {
+            font-size: 1.5rem;
             font-weight: bold;
             color: #7159c1;
         }
@@ -47,6 +48,7 @@ export const Profile = styled.div`
         margin-right: 10px;
 
         strong {
+            font-size: 1.30rem;
             display: block;
             color: #333;
         }
@@ -54,7 +56,7 @@ export const Profile = styled.div`
         a {
             display: block;
             margin-top: 2px;
-            font-size: 12px;
+            font-size: 1.10rem;
             color: #999;
         }
     }

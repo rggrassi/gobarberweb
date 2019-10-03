@@ -5,6 +5,7 @@ import {
     SIGNUP_REQUEST, 
     SIGNUP_SUCCESS, 
     SIGNUP_FAILURE,
+    SIGN_OUT,
     AUTH_REQUEST,
     AUTH_SUCCESS,
     AUTH_FAILURE
@@ -64,5 +65,11 @@ export function signUpSuccess() {
 export function signUpFailure() {
     return {
         type: SIGNUP_FAILURE
+    }
+}
+
+export function signOut() {
+    return {
+        type: SIGN_OUT
     }
 }

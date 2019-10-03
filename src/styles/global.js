@@ -16,16 +16,23 @@ export default createGlobalStyle`
         outline: 0;
     }
 
-    html, body, #root {
+    html {
         height: 100%;
+        font-size: 62.5%;
     }
 
     body {
+        height: 100%;        
+        overflow: hidden;
         -webkit-font-smoothing: antialiased;
     }
 
+    #root {
+        height: 100%;
+    }
+
     body, input, button {
-        font: 14px 'Roboto', sans-serif;
+        font-family: 'Roboto', sans-serif;
     }
 
     a {

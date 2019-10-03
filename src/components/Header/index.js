@@ -7,7 +7,6 @@ import Notifications from '../Notifications';
 
 export default function Header() {
     const profile = useSelector(state => state.user.profile);
-
     return (
         <Container>
             <Content>

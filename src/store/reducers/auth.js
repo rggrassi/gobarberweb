@@ -5,7 +5,8 @@ import {
     SIGNUP_REQUEST, 
     SIGNUP_SUCCESS, 
     SIGNUP_FAILURE,
-    AUTH_FAILURE 
+    AUTH_FAILURE,
+    SIGN_OUT 
 } from '../actions/types';
 
 const INITIAL_STATE = { token: null, signed: false, loading: false };
@@ -32,6 +33,9 @@ export default function auth(state = INITIAL_STATE, action) {
         }
         case AUTH_FAILURE: {
             return { ...state, signed: false }
+        }
+        case SIGN_OUT: {
+            return { ...state, token: null, signed: false }
         }
         default: 
             return state;

@@ -1,4 +1,4 @@
-import { SIGNIN_SUCCESS, UPDATE_PROFILE_SUCCESS } from '../actions/types'
+import { SIGNIN_SUCCESS, UPDATE_PROFILE_SUCCESS, SIGN_OUT } from '../actions/types'
 
 const INITIAL_STATE = { 
     profile: null, 
@@ -11,6 +11,9 @@ export default function user(state = INITIAL_STATE, action) {
         }
         case UPDATE_PROFILE_SUCCESS: {
             return { ...state, profile: action.payload.profile }
+        }
+        case SIGN_OUT: {
+            return { ...state, profile: null }
         }
         default: 
             return state;

@@ -23,19 +23,21 @@ export const Container = styled.div`
     }
 
     ul {
-        height: calc(100% - 69px);
-        padding-right: 15px;
-
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 15px;
+        padding-right: 12px;
     }
 
     .scrollbar-container {
         margin-top: 30px;
+        padding: 5px;
+    }
+
+    .ps__rail-y {
+        opacity: 0.6;
     }
 `
-
 export const Time = styled.li`
     padding: 20px;
     border-radius: 4px;

@@ -1,17 +1,45 @@
-import React, { useState, useMemo } from 'react';
-import { format, addDays, subDays } from 'date-fns';
+import React, { useState, useMemo, useEffect } from 'react';
+import { format, addDays, subDays, startOfDay, setHours, isBefore, isEqual, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt-BR';
+import { utcToZonedTime } from 'date-fns-tz';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import ScrollBar from 'react-perfect-scrollbar';
 import api from '../../services/api';
 import { Container, Time } from './styles';
 
+const rangeOfHours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+
 export default function Dashboard() {
-
-    const [ date, setDate ] = useState(new Date());
-
+    const [ date, setDate ] = useState(startOfDay(new Date()));
+    const [ schedules, setSchedules ] = useState([]);
+    
     const dateFormatted = useMemo(() => {
         return format(date, "dd 'de' MMMM", { locale: pt });
+    }, [date]);
+    
+    useEffect(() => {
+        async function fetchSchedule() {
+            const response = await api.get('/schedule', {
+                params: { date }
+            })
+
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+            const schedules = rangeOfHours.map(hour => {
+                const checkTime = setHours(date, hour);
+                const compareTime = utcToZonedTime(checkTime, timezone);
+                return {
+                    time: `${hour}:00h`,
+                    past: isBefore(compareTime, new Date()),
+                    appointment: response.data.find(schedule => (
+                        isEqual(parseISO(schedule.date), compareTime)
+                    ))
+                }
+            })
+
+            setSchedules(schedules);
+        }
+        fetchSchedule();
     }, [date]);
 
     function handlePrevDay() {
@@ -36,166 +64,12 @@ export default function Dashboard() {
 
             <ScrollBar options={{ wheelSpeed: 0.15 }} >
                 <ul>
-                    <Time past>
-                        <strong>08:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time available>
-                        <strong>09:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>10:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>11:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time past>
-                        <strong>08:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time available>
-                        <strong>09:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>10:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>11:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time past>
-                        <strong>08:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time available>
-                        <strong>09:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>10:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>11:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time past>
-                        <strong>08:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time available>
-                        <strong>09:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>10:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>11:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time past>
-                        <strong>08:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time available>
-                        <strong>09:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>10:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>11:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time past>
-                        <strong>08:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time available>
-                        <strong>09:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>10:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>11:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time past>
-                        <strong>08:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time available>
-                        <strong>09:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>10:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>11:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time past>
-                        <strong>08:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time available>
-                        <strong>09:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>10:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>11:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time past>
-                        <strong>08:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time available>
-                        <strong>09:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>10:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>11:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time past>
-                        <strong>08:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time available>
-                        <strong>09:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>10:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
-                    <Time>
-                        <strong>11:00</strong>
-                        <span>Rodrigo Grassi</span>
-                    </Time>
+                    { schedules.map(schedule => (
+                        <Time key={schedule.time} past={schedule.past} available={!schedule.appointment}>
+                            <strong>{schedule.time}</strong>
+                            <span>{ schedule.appointment ? schedule.appointment.user.name : 'Em aberto' }</span>
+                        </Time>
+                    )) }
                 </ul>
             </ScrollBar>
         </Container>
